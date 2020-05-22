@@ -1,0 +1,19 @@
+version: '3.5'
+
+networks:
+  internal:
+    name: trustbridge-ethereum-channel-internal
+
+services:
+
+  ganache-cli:
+    image: tradetrust/ganache-cli
+    container_name: trustbridge-ethereum-channel-ganache-cli
+    entrypoint: '/ganache-cli/entrypoint.sh'
+    build:
+      context: '${dockerstagedir:-.}/ganache-cli'
+      dockerfile: Dockerfile
+    volumes:
+      - '${dockerstagedir:-.}/ganache-cli:/ganache-cli'
+    networks:
+      - internal
