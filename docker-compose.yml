@@ -7,7 +7,7 @@ networks:
 services:
 
   ganache-cli:
-    image: tradetrust/ganache-cli
+    image: trustbridge-ethereum-channel/ganache-cli
     container_name: trustbridge-ethereum-channel-ganache-cli
     entrypoint: '/ganache-cli/entrypoint.sh'
     build:
@@ -15,5 +15,18 @@ services:
       dockerfile: Dockerfile
     volumes:
       - '${dockerstagedir:-.}/ganache-cli:/ganache-cli'
+    networks:
+      - internal
+
+  truffle:
+    image: trustbridge-ethereum-channel/truffle
+    container_name: trustbridge-ethereum-channel-truffle
+    entrypoint: /truffle/entrypoint.sh
+    build:
+      context: '${dockerstagedir:-.}/truffle'
+      dockerfile: Dockerfile
+    volumes:
+      - '${dockerstagedir:-.}/truffle:/truffle'
+      - '${dockerstagedir:-.}/contracts:/truffle/contracts'
     networks:
       - internal

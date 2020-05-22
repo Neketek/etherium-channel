@@ -25,4 +25,15 @@ build:
 .PHONY: shell-ganache-cli
 .ONESHELL:
 shell-ganache-cli:
-	@ docker-compose exec ganache-cli /bin/sh
+	@ docker-compose exec ganache-cli /bin/bash
+
+.PHONY: shell-truffle
+.ONESHELL:
+shell-truffle:
+	@ docker-compose exec truffle /bin/bash
+
+
+.PHONY: clear-blockhain
+clear-blockhain:
+	@ rm -rf ganache-cli/database
+	@ mkdir ganache-cli/database
